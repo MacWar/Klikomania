@@ -1,0 +1,4 @@
+
+ - t³o
+ - godzina
+ - lista + siatka (+obliczenia powierzchni)

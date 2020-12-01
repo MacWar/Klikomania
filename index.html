@@ -1,0 +1,188 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <title>
+            Home.
+        </title>
+    </head>
+
+        
+    <body onselectstart="return false" > 
+    <div id="pictures">
+        <img            src="images/dom.jpg"            id="bodybg">
+        <img src="images/39551954-fence-wallpapers.jpg" id="bodybg">
+        <img src="images/39603603-fence-wallpapers.jpg" id="bodybg">
+        <img src="images/39402885-fence-wallpapers.jpg" id="bodybg">
+    </div>
+        <header id="site-header">
+            <div id="site-logo">
+                <img src="images/zsti.png">
+            </div>
+               
+                <nav id="site-header-nav">
+                    <div id="site-header-nav-menu">
+                        <ul>
+                                                <li class="col-2 " id="home"><a href="index.html">Strona Główna</a></li>
+                                                <li class="col-2 border-left-li-menu"><a href="table.html">Zakupy</a></li>
+                                                <li class="col-2 border-left-li-menu"><a href="form.html">Wyraź Opinię</a></li>
+                                                <li class="col-2 border-left-li-menu"><a href="gallery.html">Galeria</a></li>
+                                                <li class="col-2 border-left-li-menu"><a href="kontakt.html">Kontakt</a></li>
+                                                <li class="col-2">
+                                                    <button id="burger" onclick="wraplist()">&#9776;
+                                                            <div id="mobile-menu">
+                                                                <div id="mobile-menu-content" class="col-9">
+                                                                    <ul>
+                                                                        <li class="" id=""><a href="index.html">Strona </a></li>
+
+                                                                        <li class="" id=""><a href="index.html">Strona </a></li>
+                                                                        <li class="" id=""><a href="index.html">Strona </a></li>
+                                                                        <li class="" id=""><a href="index.html">Strona </a></li>
+                                                                        <li class="" id=""><a href="index.html">Strona </a></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                    </button>
+                                                </li>
+                        </ul>
+                    </div>          
+                </nav>
+            
+        </header>
+        
+        <div class="menu-header">
+            <div class="menu-header-heads col-9">
+                
+                        <h1>ZSTI - Architektura domostw.</h1>
+                        <h2>Zabudowa, Siatki i Techniki Inżynieryjne. Sieć hipermarketów branży budowlanej. Urządź dom po swojemu!</h2>
+
+                        <input type="text" id="ilosc" class="button" placeholder="Ilość metrów">&nbsp; &nbsp;
+                        <select name="siatki" id="siatki" class="button">
+                            <option selected disabled>Wybierz</option>
+                            <option value="1">Siatka1</option>
+                            <option value="2">Siatka2</option>
+                            <option value="3">Siatka3</option>
+                            <option value="4">Siatka4</option>
+                            <option value="5">Siatka5</option>
+                        </select>&nbsp; &nbsp;
+                        <a href="#" class="button"><div id="cena">0.00</div>zł/m</a>&nbsp; &nbsp;
+                        <a href="#" class="buttonw">Cena:&nbsp;<div id="wynikc"></div></a>
+                
+            </div>
+        </div>
+        
+        <div class="foreground">
+            <div class="blat"></div>
+            <div class="lap"></div>
+            <div id="ekran" onMouseOver="hover();" onMouseOut="hover2();"></div>
+        
+        <footer id="site-footer">
+            <div id="zegarek"></div>
+        </footer>
+        
+       <script type="text/javascript">
+           
+           function wynik(){
+               var ilosc = document.getElementById("ilosc").value;
+               var cena = document.getElementById("cena").innerHTML;
+               
+               document.getElementById("wynikc").innerHTML = parseFloat(ilosc * cena).toFixed(2) + "zł";
+               
+           }
+           setInterval("wynik()", 1000);
+           
+            siatki.onchange = function(){
+                var siatki = document.getElementById("siatki");
+               var cena = document.getElementById("cena");
+
+               if(siatki.value==1){
+                    document.getElementById("ekran").style.backgroundImage = "url('images/1.png')";
+                    cena.innerHTML="45.50";
+               }
+                
+                if(siatki.value==2){
+                    document.getElementById("ekran").style.backgroundImage = "url('images/2.png')";
+                    cena.innerHTML="39.40";
+               }
+                
+                if(siatki.value==3){
+                    document.getElementById("ekran").style.backgroundImage = "url('images/3.png')";
+                    cena.innerHTML="23.60";
+               }
+                
+                if(siatki.value==4){
+                    document.getElementById("ekran").style.backgroundImage = "url('images/4.png')";
+                    cena.innerHTML="41.15";
+               }
+                
+                if(siatki.value==5){
+                    document.getElementById("ekran").style.backgroundImage = "url('images/5.png')";
+                    cena.innerHTML="19.20";
+               }
+            }
+           
+           var slider = document.getElementById("ekran");
+           var slajdy = ["images/home-intro-screens-redfin.png","images/home-intro-screens-usa-swimming.png","images/home-intro-screens-rover.png"]
+           
+		function hover(){
+			document.getElementById("ekran").style.filter="saturate(300%)";
+		}
+
+		function hover2(){
+			document.getElementById("ekran").style.filter="saturate(100%)";
+		}
+
+            function zegar(){
+                var slajd1 = "url('images/hamster2.png')";
+                now = new Date();
+                var days = ["Niedziela","Poniedziałek","Wtorek","Środa","Czwartek","Piątek","Sobota"];
+                
+                var year = now.getFullYear();
+                var month = now.getMonth()+1;
+                var day = now.getDate();
+                var dayOfWeek = now.getDay();
+                
+                var hours = now.getHours();
+                var minutes = now.getMinutes();
+                var seconds = now.getSeconds();
+                
+                if(month < 10) month = "0" + month;
+                if(day < 10) day = "0" + day;
+                
+                if (hours < 10) hours = "0" + hours;
+                if (minutes < 10) minutes = "0" + minutes;
+                if (seconds < 10) seconds = "0" + seconds;
+
+                document.getElementById('zegarek').innerHTML =  year + "-" + month + "-" + day + " " + days[dayOfWeek] + " " + hours + ":" + minutes + ":" + seconds  ;
+                
+            }
+            setInterval("zegar()", 1000);
+        
+           
+           (function () {
+                var container = document.querySelector("#pictures");
+                var pictures = container.querySelectorAll("img");
+
+                function change () {
+                    var current = container.querySelector("img.current");
+                    var next = container.querySelector("img.current + img") || pictures[0];
+
+                    if (current) {
+                        current.classList.remove("current");
+                    }
+
+                    if (next) {
+                        next.classList.add("current");
+                    }
+                }
+
+                change();
+                setInterval(change, 5000);
+            }());
+        
+            
+        
+        </script>
+        <script src="/heatmap.js"></script>
+    </body>
+</html>

@@ -1,13 +1,34 @@
 {
-"name": "Klikomania",
-"version": "1.0",
-"manifest_version": 2,
-"content_scripts": [{
- "matches": ["<all_urls>"],
- "js":["heatmap.js"]
- }],
- "browser_action":{
- "default_popup": "popup.html",
- "default_title": "Klikomania"
- }
- }
+    "name": "Klikomania",
+    "version": "1.0.0",
+    "manifest_version": 2,
+    
+    "content_scripts": [{
+        "matches": ["<all_urls>"],
+        "js":["heatmap.js"]
+     }],
+    
+    "icons": {
+        "16": "sources/icon.png",
+        "48": "sources/icon.png",
+        "128": "sources/icon.png" 
+    },
+    
+    "browser_action":{
+        "default_popup": "popup.html",
+        "default_title": "Klikomania",
+        "default_icon":"sources/icon.png"
+        },
+    
+    "permissions": [
+        "tabs", 
+        "chrome://favicon/", 
+        "http://*/*",  
+        "https://*/*" 
+        ],
+    
+    
+    "description": "Monitoruj zachowanie użytkownika na stronach internetowych.  \nDokumentuj jego działania i prowadź statystyki."
+     }
+    
+     

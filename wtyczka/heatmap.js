@@ -5,26 +5,9 @@
 
 
 let hl=document.querySelector("html");
-let but=document.createElement("button");
 let flag=-1;
 let points=[];
 let point;
-
-//document.body.appendChild(but);
-//but.style.width=100;
-//but.style.height=100;
-//t.style.zIndex=100;
-//document.body.appendChild(hmd);
-
-
-// hl.onclick=function(event){
-// 	point={
-// 		x: event.pageX,
-// 		y: event.pageY,
-// 		value: 5
-// 	}
-// 	points.push(point);
-// }
 
 hl.addEventListener("click",function(event){drawheat(event),true});
 
@@ -51,8 +34,7 @@ chrome.runtime.onMessage.addListener(function(request){
 			max: 5,
 			data: points
 		});
-	
-	}
+		document.querySelector('.heatmap-canvas').style.zIndex=Number.MAX_SAFE_INTEGER;	}
 	else{
 		let cnv=document.querySelector('.heatmap-canvas');
 		cnv.remove();

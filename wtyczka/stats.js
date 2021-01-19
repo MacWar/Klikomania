@@ -1,21 +1,23 @@
 
+
 window.onload = function() {
 
-    // var hrefElements = document.querySelectorAll('a:not([href=""])');
+    var hrefElements = document.querySelectorAll('a[href^="http://"], a[href^="https://"], a[href^="/"]');
 
-    // console.log(hrefElements);
+    console.log(hrefElements);
 
 
-
-    document.querySelectorAll('a:not([href=""])').forEach(item => {
+    // document.querySelectorAll('a:not([href=""])').forEach(item => {
+    
+};
+document.querySelectorAll('a[href^="http://"], a[href^="https://"], a[href^="/"]').forEach(item => {
         item.addEventListener('click', event => {
         
-            console.log(item);
+            var jsonItem = JSON.stringify(window.location.hostname);
+            console.log(jsonItem);
         })
     })
-};
-
-
+/*
 hl.addEventListener('click',function(e){
 /*hl.addEventListener('click',function(e){
     nodeName = e.target.nodeName;

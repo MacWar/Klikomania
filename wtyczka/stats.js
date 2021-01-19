@@ -1,10 +1,10 @@
-
+const fs = require('fs')
 var licznik =0;
+// localStorage.licznik=0;
 window.onload = function() {
 
     var hrefElements = document.querySelectorAll('a[href^="http://"], a[href^="https://"], a[href^="/"]');
     console.log(hrefElements);
-    console.log(licznik);
     
 };
 
@@ -13,10 +13,18 @@ document.querySelectorAll('a[href^="http://"], a[href^="https://"], a[href^="/"]
     
         var jsonItem = JSON.stringify(window.location.hostname);
         console.log(item);
-        console.log(licznik);
-        licznik++;
-        console.log(licznik);
+        console.log(localStorage.licznik);
+        localStorage.licznik++;
+        console.log(localStorage.licznik);
 
+        
+        fs.readFile('./stats.json', 'utf8', (err, jsonString) => {
+        if (err) {
+            console.log("File read failed:", err)
+            return
+        }
+        console.log('File data:', jsonString) 
+})
             
     })
 })

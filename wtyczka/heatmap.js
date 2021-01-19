@@ -7,7 +7,10 @@
 let hl=document.querySelector("html");
 let flag=-1;
 let points=[];
-let point;
+let point=" ";
+let print;
+let url=window.location.hostname;
+let date=new Date().toLocaleString();
 
 hl.addEventListener("click",function(event){drawheat(event),true});
 
@@ -17,11 +20,21 @@ function drawheat(event){
 		y: event.pageY,
 		value: 5
 	}
+	
 	points.push(point);
+	print+="\n"+point.x+" "+point.y+"\n";
 }
 
 
-
+function download(filename, text) {
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', filename);
+    element.style.display = 'none';
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+  }
 
 chrome.runtime.onMessage.addListener(function(request){
 	flag*=-1;
@@ -34,7 +47,9 @@ chrome.runtime.onMessage.addListener(function(request){
 			max: 5,
 			data: points
 		});
-		document.querySelector('.heatmap-canvas').style.zIndex=Number.MAX_SAFE_INTEGER;	}
+		document.querySelector('.heatmap-canvas').style.zIndex=Number.MAX_SAFE_INTEGER;	
+		download(date+" "+url+".txt",print);
+	}
 	else{
 		let cnv=document.querySelector('.heatmap-canvas');
 		cnv.remove();

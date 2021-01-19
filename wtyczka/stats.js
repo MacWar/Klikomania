@@ -1,21 +1,33 @@
 
+var licznik =0;
 window.onload = function() {
 
-    // var hrefElements = document.querySelectorAll('a:not([href=""])');
-
-    // console.log(hrefElements);
-
-
-
-    document.querySelectorAll('a:not([href=""])').forEach(item => {
-        item.addEventListener('click', event => {
-        
-            console.log(item);
-        })
-    })
+    var hrefElements = document.querySelectorAll('a[href^="http://"], a[href^="https://"], a[href^="/"]');
+    console.log(hrefElements);
+    console.log(licznik);
+    
 };
 
+document.querySelectorAll('a[href^="http://"], a[href^="https://"], a[href^="/"]').forEach(item => {
+    item.addEventListener('click', event => {
+    
+        var jsonItem = JSON.stringify(window.location.hostname);
+        console.log(item);
+        console.log(licznik);
+        licznik++;
+        console.log(licznik);
 
+            
+    })
+})
+var cbox = document.querySelectorAll('a[href^="http://"], a[href^="https://"], a[href^="/"]');
+
+for (let i = 0; i < cbox.length; i++) {
+    cbox[i].addEventListener("click", function() {
+      console.log(cbox[i]);
+    });
+}
+/*
 hl.addEventListener('click',function(e){
 /*hl.addEventListener('click',function(e){
     nodeName = e.target.nodeName;

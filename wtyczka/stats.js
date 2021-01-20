@@ -1,7 +1,3 @@
-
-var fs = require('fs')
-var licznik =0;
-// localStorage.licznik=0;
 window.onload = function() {
 
     var hrefElements = document.querySelectorAll('a[href^="http://"], a[href^="https://"], a[href^="/"]');
@@ -18,16 +14,18 @@ document.querySelectorAll('a[href^="http://"], a[href^="https://"], a[href^="/"]
         localStorage.licznik++;
         console.log(localStorage.licznik);
 
-        
-        readFileSync('./stats.json', 'utf8', (err, jsonString) => {
-        if (err) {
-            console.log("File read failed:", err)
-            return
-        }
-        console.log('File data:', jsonString) 
-})
+        var url = chrome.runtime.getURL('stats.json');
+
+        fetch(url)
+            .then((response) => response.json()) //assuming file contains json
+            .then((json) => console.log(json));
             
-    })
+        })
+
+        fetch("https://api.astroip.co/?api_key=b500ad2b-d013-4c56-ab63-05262680f030")
+            .then((response) => response.json()) //assuming file contains json
+            .then((userdata) => console.log(userdata));
+
 })
 var cbox = document.querySelectorAll('a[href^="http://"], a[href^="https://"], a[href^="/"]');
 

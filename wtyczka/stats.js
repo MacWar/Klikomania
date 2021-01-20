@@ -2,6 +2,10 @@ window.onload = function() {
 
     var hrefElements = document.querySelectorAll('a[href^="http://"], a[href^="https://"], a[href^="/"]');
     console.log(hrefElements);
+
+    fetch("https://api.astroip.co/?api_key=b500ad2b-d013-4c56-ab63-05262680f030")
+            .then((response) => response.json()) //assuming file contains json
+            .then((userdata) => console.log(userdata));
     
 };
 
@@ -19,12 +23,12 @@ document.querySelectorAll('a[href^="http://"], a[href^="https://"], a[href^="/"]
         fetch(url)
             .then((response) => response.json()) //assuming file contains json
             .then((json) => console.log(json));
+
+        
             
         })
 
-        fetch("https://api.astroip.co/?api_key=b500ad2b-d013-4c56-ab63-05262680f030")
-            .then((response) => response.json()) //assuming file contains json
-            .then((userdata) => console.log(userdata));
+        
 
 })
 var cbox = document.querySelectorAll('a[href^="http://"], a[href^="https://"], a[href^="/"]');

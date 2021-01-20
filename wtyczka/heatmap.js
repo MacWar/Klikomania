@@ -11,6 +11,8 @@ let point=" ";
 let print;
 let url=window.location.hostname;
 let date=new Date().toLocaleString();
+let windowHeight=window.innerHeight;
+let windowWidth=window.innerWidth;
 
 hl.addEventListener("click",function(event){drawheat(event),true});
 
@@ -22,18 +24,18 @@ function drawheat(event){
 	}
 	
 	points.push(point);
-	print+="\n"+point.x+" "+point.y+"\n";
+	print+="\n"+"x:"+point.x+" "+"y:"+point.y+"\n";
 }
 
 
 function download(filename, text) {
-    var element = document.createElement('a');
-    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-    element.setAttribute('download', filename);
-    element.style.display = 'none';
-    document.body.appendChild(element);
-    element.click();
-    document.body.removeChild(element);
+    let temp = document.createElement('a');
+    temp.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    temp.setAttribute('download', filename);
+    temp.style.display = 'none';
+    document.body.appendChild(temp);
+    temp.click();
+    document.body.removeChild(temp);
   }
 
 chrome.runtime.onMessage.addListener(function(request){
@@ -47,7 +49,10 @@ chrome.runtime.onMessage.addListener(function(request){
 			max: 5,
 			data: points
 		});
-		document.querySelector('.heatmap-canvas').style.zIndex=Number.MAX_SAFE_INTEGER;	
+		document.querySelector('.heatmap-canvas').style.zIndex=Number.MAX_SAFE_INTEGER;
+		print+="\n"+"height of the window: "+ windowHeight;
+		print+="\n"+"width of the window: "+ windowWidth;
+		print+="\n"+"website adress: "+url;
 		download(date+" "+url+".txt",print);
 	}
 	else{

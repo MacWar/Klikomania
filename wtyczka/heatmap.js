@@ -9,7 +9,7 @@ let flag=-1;
 let points=[];
 let point=" ";
 let print;
-let url=window.location.hostname;
+let url=window.location.hostname+window.location.pathname;
 let date=new Date().toLocaleString();
 let windowHeight=window.innerHeight;
 let windowWidth=window.innerWidth;
@@ -24,7 +24,6 @@ function drawheat(event){
 	}
 	
 	points.push(point);
-	print+="\n"+"x:"+point.x+" "+"y:"+point.y+"\n";
 }
 
 
@@ -50,10 +49,13 @@ chrome.runtime.onMessage.addListener(function(request){
 			data: points
 		});
 		document.querySelector('.heatmap-canvas').style.zIndex=Number.MAX_SAFE_INTEGER;
-		print+="\n"+"height of the window: "+ windowHeight;
-		print+="\n"+"width of the window: "+ windowWidth;
-		print+="\n"+"website adress: "+url;
-		download(date+" "+url+".txt",print);
+		print={
+			"data": [
+				{"adress":url, "points":points, "window_width":windowWidth,"window_height":windowHeight}
+			]
+		}
+
+		download(date+"_heatmap.json",JSON.stringify(print));
 	}
 	else{
 		let cnv=document.querySelector('.heatmap-canvas');

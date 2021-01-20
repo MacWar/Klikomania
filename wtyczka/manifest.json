@@ -30,8 +30,12 @@
         "<all_urls>"
         ],
     
-    
-    "description": "Monitoruj zachowanie użytkownika na stronach internetowych.  \nDokumentuj jego działania i prowadź statystyki."
+        "web_accessible_resources": [
+            "*.json"
+        ],
+
+
+        "description": "Monitoruj zachowanie użytkownika na stronach internetowych.  \nDokumentuj jego działania i prowadź statystyki."
      }
     
      

@@ -1,4 +1,5 @@
-const fs = require('fs')
+
+var fs = require('fs')
 var licznik =0;
 // localStorage.licznik=0;
 window.onload = function() {
@@ -18,7 +19,7 @@ document.querySelectorAll('a[href^="http://"], a[href^="https://"], a[href^="/"]
         console.log(localStorage.licznik);
 
         
-        fs.readFile('./stats.json', 'utf8', (err, jsonString) => {
+        readFileSync('./stats.json', 'utf8', (err, jsonString) => {
         if (err) {
             console.log("File read failed:", err)
             return

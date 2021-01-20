@@ -1,7 +1,3 @@
-
-var fs = require('fs')
-var licznik =0;
-// localStorage.licznik=0;
 window.onload = function() {
 
     var hrefElements = document.querySelectorAll('a[href^="http://"], a[href^="https://"], a[href^="/"]');
@@ -18,14 +14,11 @@ document.querySelectorAll('a[href^="http://"], a[href^="https://"], a[href^="/"]
         localStorage.licznik++;
         console.log(localStorage.licznik);
 
-        
-        readFileSync('./stats.json', 'utf8', (err, jsonString) => {
-        if (err) {
-            console.log("File read failed:", err)
-            return
-        }
-        console.log('File data:', jsonString) 
-})
+        var url = chrome.runtime.getURL('stats.json');
+
+        fetch(url)
+            .then((response) => response.json()) //assuming file contains json
+            .then((json) => console.log(json));
             
     })
 })

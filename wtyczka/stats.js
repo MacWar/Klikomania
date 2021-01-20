@@ -1,24 +1,33 @@
+var userdata;
 window.onload = function() {
 
     var hrefElements = document.querySelectorAll('a[href^="http://"], a[href^="https://"], a[href^="/"]');
+    
     console.log(hrefElements);
 
     fetch("https://api.astroip.co/?api_key=b500ad2b-d013-4c56-ab63-05262680f030")
             .then((response) => response.json()) //assuming file contains json
-            .then((userdata) => console.log(userdata));
+            .then((userdataTMP) => userdata = userdataTMP)
+            .then((userdata) => console.log(userdata))
     
 };
 
 document.querySelectorAll('a[href^="http://"], a[href^="https://"], a[href^="/"]').forEach(item => {
     item.addEventListener('click', event => {
-    
-        var jsonItem = JSON.stringify(window.location.hostname);
-        console.log(item);
-        console.log(localStorage.licznik);
-        localStorage.licznik++;
-        console.log(localStorage.licznik);
 
         var url = chrome.runtime.getURL('stats.json');
+        var clickedHrefItem = item;
+        console.log(clickedHrefItem);
+        var clickedHrefItem = item.outerHTML;
+
+        var filesDataJSON = {
+            userdata : userdata,
+            location: window.location,
+            hrefItem: clickedHrefItem,
+            event: event
+
+        };
+        download("stats.json",JSON.stringify(filesDataJSON));
 
         fetch(url)
             .then((response) => response.json()) //assuming file contains json
@@ -26,18 +35,19 @@ document.querySelectorAll('a[href^="http://"], a[href^="https://"], a[href^="/"]
 
         
             
-        })
-
-        
+    })
 
 })
-var cbox = document.querySelectorAll('a[href^="http://"], a[href^="https://"], a[href^="/"]');
 
-for (let i = 0; i < cbox.length; i++) {
-    cbox[i].addEventListener("click", function() {
-      console.log(cbox[i]);
-    });
-}
+function download(filename, text) {
+    let temp = document.createElement('a');
+    temp.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    temp.setAttribute('download', filename);
+    temp.style.display = 'none';
+    document.body.appendChild(temp);
+    temp.click();
+    document.body.removeChild(temp);
+  }
 /*
 hl.addEventListener('click',function(e){
 /*hl.addEventListener('click',function(e){

@@ -27,7 +27,8 @@
         "https://*/*" ,
         "activeTab",
         "downloads",
-        "<all_urls>"
+        "<all_urls>",
+        "storage"
         ],
     
         "web_accessible_resources": [

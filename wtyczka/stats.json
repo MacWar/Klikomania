@@ -1,5 +1,7 @@
 { 
-    "aHrefEvent":[
-        
-    ]
+    "hostname":"google.pl",
+    "clicks":{
+        "left":5,
+        "right":13
+    }
 }

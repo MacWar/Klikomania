@@ -13,10 +13,10 @@ window.onload = function () {
     //   });
     // }
 
-    fetch("https://api.astroip.co/?api_key=b500ad2b-d013-4c56-ab63-05262680f030")
-            .then((response) => response.json()) 
-            .then((userdataTMP) => userdata = userdataTMP)
-            .then((userdata) => console.log(userdata))   
+  fetch("https://api.astroip.co/?api_key=b500ad2b-d013-4c56-ab63-05262680f030")
+  .then((response) => response.json()) 
+  .then((userdataTMP) => userdata = userdataTMP)
+  .then((userdata) => console.log(userdata))   
 };
 
 document.querySelectorAll('a[href^="http://"], a[href^="https://"], a[href^="/"]').forEach(item => {
@@ -48,10 +48,10 @@ function download(filename, text) {
     document.body.appendChild(temp);
     temp.click();
     document.body.removeChild(temp);
-  }
+}
 
 
-
+//                ######################    Clicks data & leaving pages data
 
 function setCookie(cname,cvalue,exdays) {
     var d = new Date();

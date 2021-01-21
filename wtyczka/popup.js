@@ -19,6 +19,18 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 }, false)
 
+document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("user_info").addEventListener('click', onclick, false)
+    function onclick() {
+        var dataaa = null;
+        dataaa = localStorage.getItem("dataofuser");
+        //chrome.storage.local.get(['dane'], result => {
+          //  dataaa = JSON.parse(result.dane);
+            download("plik.json", JSON.stringify(dataaa));
+        //});
+    }
+}, false)
+
 function download(filename, text) {
     var element = document.createElement('a');
     element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));

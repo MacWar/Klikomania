@@ -2,27 +2,19 @@ var userdata;
 window.onload = function () {
     checkCookie();
 
-    //if(window.location.pathname==localStorage.leavingPageDataTMP.leavingPageData.pathname) localStorage.leavingPageDataTMP=null;
 
-    if(localStorage.leavingPageDataTMP==="http*"){
-      console.log("downloading from localstorage");
-      download("leavingStats.json",localStorage.leavingPageDataTMP);
-      //localStorage.leavingPageDataTMP=null;
-    }
-
-    window.addEventListener('onbeforeunload', function (e) {
-      //console.log("before")
-        leavingPageData = window.location;
-        leavingPageDataJSON = {
-            leavingPageData : leavingPageData
-        }
-        localStorage.leavingPageDataTMP = window.location;
-        // e.returnValue = 'dgf';
-      });
-      
+    // window.addEventListener('beforeunload', function (e) {
+    //   strDane = JSON.parse(window.location.hostname);
+    //   chrome.storage.local.set({dane: strDane}, () => {/*console.log(allData)*/});
+    // });
+    // if(true){
+    //   chrome.storage.local.get(['dane'], result => {
+    //     download("leavingStats.json",JSON.stringify(result));
+    //   });
+    // }
 
     fetch("https://api.astroip.co/?api_key=b500ad2b-d013-4c56-ab63-05262680f030")
-            .then((response) => response.json()) //assuming file contains json
+            .then((response) => response.json()) 
             .then((userdataTMP) => userdata = userdataTMP)
             .then((userdata) => console.log(userdata))   
 };
@@ -30,7 +22,6 @@ window.onload = function () {
 document.querySelectorAll('a[href^="http://"], a[href^="https://"], a[href^="/"]').forEach(item => {
     item.addEventListener('click', event => {
 
-        var url = chrome.runtime.getURL('stats.json');
         var clickedHrefItem = item;
         console.log(clickedHrefItem);
         var clickedHrefItem = item.outerHTML;
@@ -40,25 +31,15 @@ document.querySelectorAll('a[href^="http://"], a[href^="https://"], a[href^="/"]
             location: window.location,
             hrefItem: clickedHrefItem,
             event: event
-
         };
-        download("stats.json",JSON.stringify(filesDataJSON));
+        download("hrefStats.json",JSON.stringify(filesDataJSON));
 
+        var url = chrome.runtime.getURL('stats.json');
         fetch(url)
-            .then((response) => response.json()) //assuming file contains json
+            .then((response) => response.json()) 
             .then((json) => console.log(json));          
     })
 })
-function lastRemember(){
-    var pageLeavingData = window;
-
-    pageLeavingDataJSON = {
-        windowData : pageLeavingData
-    }
-
-    download("stats.json",JSON.stringify(pageLeavingDataJSON));
-}
-
 function download(filename, text) {
     let temp = document.createElement('a');
     temp.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
@@ -69,26 +50,6 @@ function download(filename, text) {
     document.body.removeChild(temp);
   }
 
-/*
-hl.addEventListener('click',function(e){
-/*hl.addEventListener('click',function(e){
-    nodeName = e.target.nodeName;
-    e.target.id ? id = e.target.id : id = null;
-    classes = e.target.className.split(' ');
-    console.log(window.location.hostname+nodeName + id + classes);
-    
-
-});
-
-
-    // var href=e.target.getAttribute("href");
-
-    // console.log(href);
-    // if(href!= null){
-    //     href = href.split(".");
-    //     console.log(href);
-    // }
-});*/
 
 
 

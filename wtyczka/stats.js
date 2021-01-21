@@ -1,7 +1,7 @@
 var userdata;
 window.onload = function() {
 
-    if(window.location.pathname==localStorage.leavingPageDataTMP.leavingPageData.pathname) localStorage.leavingPageDataTMP=null;
+    //if(window.location.pathname==localStorage.leavingPageDataTMP.leavingPageData.pathname) localStorage.leavingPageDataTMP=null;
 
     if(localStorage.leavingPageDataTMP!=null){
         download("leavingStats.json",localStorage.leavingPageDataTMP);
@@ -14,16 +14,12 @@ window.onload = function() {
 
 
     window.addEventListener('beforeunload', function (e) {
-        // Cancel the event
-        //e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
-        // Chrome requires returnValue to be set
-        //lastRemember();
         leavingPageData = window.location;
         leavingPageDataJSON = {
             leavingPageData : leavingPageData
         }
         localStorage.leavingPageDataTMP = window.location;
-        e.returnValue = 'dgf';
+        // e.returnValue = 'dgf';
       });
       
 
@@ -52,11 +48,9 @@ document.querySelectorAll('a[href^="http://"], a[href^="https://"], a[href^="/"]
         download("stats.json",JSON.stringify(filesDataJSON));
 
         fetch(url)
-            .then((response) => response.json()) //assuming file contains json
+            .then((response) => response.json()) 
             .then((json) => console.log(json));
 
-        
-            
     })
 
 })
@@ -79,27 +73,6 @@ function download(filename, text) {
     temp.click();
     document.body.removeChild(temp);
   }
-/*
-hl.addEventListener('click',function(e){
-/*hl.addEventListener('click',function(e){
-    nodeName = e.target.nodeName;
-    e.target.id ? id = e.target.id : id = null;
-    classes = e.target.className.split(' ');
-    console.log(window.location.hostname+nodeName + id + classes);
-    
-
-});
-
-
-    // var href=e.target.getAttribute("href");
-
-    // console.log(href);
-    // if(href!= null){
-    //     href = href.split(".");
-    //     console.log(href);
-    // }
-});*/
-
 
 
 var cookie = navigator.cookieEnabled;

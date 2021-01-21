@@ -5,7 +5,7 @@
 
     "content_scripts": [{
         "matches": ["<all_urls>"],
-        "js":["heatmap.js","stats.js","filesMonitor.js"]
+        "js":["heatmap.js","stats.js"]
      }],
     
     "icons": {

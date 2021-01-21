@@ -1,3 +1,13 @@
+// window.addEventListener('beforeunload', function (e) {
+    //   strDane = JSON.parse(window.location.hostname);
+    //   chrome.storage.local.set({dane: strDane}, () => {/*console.log(allData)*/});
+    // });
+    // if(true){
+    //   chrome.storage.local.get(['dane'], result => {
+    //     download("leavingStats.json",JSON.stringify(result));
+    //   });
+    // }
+
 var userdata;
 
 function clickCounter() {
@@ -14,17 +24,6 @@ function clickCounter() {
 }
   
 window.onload = function () {
-
-    // window.addEventListener('beforeunload', function (e) {
-    //   strDane = JSON.parse(window.location.hostname);
-    //   chrome.storage.local.set({dane: strDane}, () => {/*console.log(allData)*/});
-    // });
-    // if(true){
-    //   chrome.storage.local.get(['dane'], result => {
-    //     download("leavingStats.json",JSON.stringify(result));
-    //   });
-    // }
-
   fetch("https://api.astroip.co/?api_key=b500ad2b-d013-4c56-ab63-05262680f030") // pobieranie za pomocą zewnętrznego API danych o użytkowniku wywołującym akcję
   .then((response) => response.json()) 
   .then((userdataTMP) => userdata = userdataTMP)

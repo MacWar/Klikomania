@@ -11,23 +11,12 @@ document.addEventListener('DOMContentLoaded',function(){
 document.addEventListener("DOMContentLoaded", function () {
     document.querySelector('button#download_data').addEventListener('click', onclick, false)
     function onclick() {
+        var d = new Date();
         var dataa = null;
         chrome.storage.local.get(['dane'], result => {
             dataa = JSON.parse(result.dane);
-            download("plik.json", JSON.stringify(dataa));
+            download(d.toLocaleDateString() + " " + d.toLocaleTimeString() + " " + window.location.href + " clickStats.json", JSON.stringify(dataa));
         });
-    }
-}, false)
-
-document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("user_info").addEventListener('click', onclick, false)
-    function onclick() {
-        var dataaa = null;
-        dataaa = localStorage.getItem("dataofuser");
-        //chrome.storage.local.get(['dane'], result => {
-          //  dataaa = JSON.parse(result.dane);
-            download("plik.json", JSON.stringify(dataaa));
-        //});
     }
 }, false)
 

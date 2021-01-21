@@ -561,6 +561,7 @@ function download(filename, text) {
 }
 
 chrome.runtime.onMessage.addListener(function (request) {
+	var d = new Date();
 	flag *= -1;
 	if (flag == 1) {
 		var heatmap = h337.create({
@@ -572,16 +573,42 @@ chrome.runtime.onMessage.addListener(function (request) {
 			data: points
 		});
 		document.querySelector('.heatmap-canvas').style.zIndex = Number.MAX_SAFE_INTEGER;
-		print = {
-			"data": [
-				{ "adress": url, "points": points, "window_width": windowWidth, "window_height": windowHeight }
-			]
-		}
+		print = [
+			{ "adress": url, "points": points, "window_width": windowWidth, "window_height": windowHeight }
+		]
 
-		download(date + "_heatmap.json", JSON.stringify(print));
+		download(d.toLocaleDateString() + " " + d.toLocaleTimeString() + " " + window.location.href + "_heatmap.json", JSON.stringify(print));
 	}
 	else {
 		let cnv = document.querySelector('.heatmap-canvas');
 		cnv.remove();
 	}
+})
+
+document.querySelectorAll('a[href^="http://"], a[href^="https://"], a[href^="/"]').forEach(item => {
+	item.addEventListener('click', event => {
+		var d = new Date();
+
+		flag *= -1;
+		if (flag == 1) {
+			var heatmap = h337.create({
+				container: hl
+			});
+
+			heatmap.setData({
+				max: 5,
+				data: points
+			});
+			document.querySelector('.heatmap-canvas').style.zIndex = Number.MAX_SAFE_INTEGER;
+			print = [
+				{ "adress": url, "points": points, "window_width": windowWidth, "window_height": windowHeight }
+			]
+
+			download(d.toLocaleDateString() + " " + d.toLocaleTimeString() + " " + window.location.href + "_heatmap.json", JSON.stringify(print));
+		}
+		else {
+			let cnv = document.querySelector('.heatmap-canvas');
+			cnv.remove();
+		}
+	})
 })

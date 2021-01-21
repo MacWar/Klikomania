@@ -15,8 +15,6 @@ function clickCounter() {
 }
   
 window.onload = function () {
-
-
     // window.addEventListener('beforeunload', function (e) {
     //   strDane = JSON.parse(window.location.hostname);
     //   chrome.storage.local.set({dane: strDane}, () => {/*console.log(allData)*/});
@@ -35,9 +33,9 @@ window.onload = function () {
 
 document.querySelectorAll('a[href^="http://"], a[href^="https://"], a[href^="/"]').forEach(item => {
     item.addEventListener('click', event => {
-        var pagelink = window.location.href;
 
         clickCounter();
+        var d = new Date();
 
         var clickedHrefItem = item;
 
@@ -53,12 +51,12 @@ document.querySelectorAll('a[href^="http://"], a[href^="https://"], a[href^="/"]
             exitsNumber: localStorage.clickcount
         };
 
-        download("hrefDatas.json", JSON.stringify(filesDataJSON));
+        download(d.toLocaleDateString() + " " + d.toLocaleTimeString() + " " + window.location.href + " hrefDatas.json", JSON.stringify(filesDataJSON));
         
         var dataa = null;
         chrome.storage.local.get(['dane'], result => {
             dataa = JSON.parse(result.dane);
-            download("exits.json", JSON.stringify(dataa));
+            download(d.toLocaleDateString() + " " + d.toLocaleTimeString() + " " + window.location.href + " clickStats.json", JSON.stringify(dataa));
         });
 
         var url = chrome.runtime.getURL('stats.json');

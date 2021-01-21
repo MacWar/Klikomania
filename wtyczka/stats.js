@@ -26,8 +26,7 @@ window.onload = function() {
     fetch("https://api.astroip.co/?api_key=b500ad2b-d013-4c56-ab63-05262680f030")
             .then((response) => response.json()) //assuming file contains json
             .then((userdataTMP) => userdata = userdataTMP)
-            .then((userdata) => console.log(userdata))
-    
+            .then((userdata) => console.log(userdata))   
 };
 
 document.querySelectorAll('a[href^="http://"], a[href^="https://"], a[href^="/"]').forEach(item => {
@@ -48,11 +47,9 @@ document.querySelectorAll('a[href^="http://"], a[href^="https://"], a[href^="/"]
         download("stats.json",JSON.stringify(filesDataJSON));
 
         fetch(url)
-            .then((response) => response.json()) 
-            .then((json) => console.log(json));
-
+            .then((response) => response.json()) //assuming file contains json
+            .then((json) => console.log(json));          
     })
-
 })
 function lastRemember(){
     var pageLeavingData = window;
@@ -87,60 +84,30 @@ console.log("User language is: " + language);
 console.log("User screen is " + width + " width");
 console.log("User screen is " + height + " height");
 
-/*var allData = [];
-
-
-
-document.querySelector("body").addEventListener("click", (event) => {
-    /*const isButton = event.target.nodeName === 'BUTTON';
-
-    if (!isButton) {
-        return;
-    }
-
-    var btn_name = event.target.nodeName;
-    var btn_class = event.target.className;
-    var btn_id = event.target.id;
-    var btn_parent = event.target.parentNode.nodeName;
-    var date = new Date();
-    var time = date.toLocaleTimeString();
-
-    if (btn_class == "") {
-        btn_class = null;
-    } 
-    else if (btn_id == "") {
-        btn_id = null;
-    }
-
-    allData.push({
-        NodeName: "coś",
-        ClassName: "coś",
-        Id: "coś",
-        Date: "coś",
-      });    
-
-    console.log("The name of clicked object is:" + btn_name);
-    console.log("The class of clicked object is:" + btn_class);
-    console.log("The id of clicked object is:" + btn_id);
-    console.log("The name of clicked object parent is:" + btn_parent);
-    console.log("The time of clicked object is: " + time);
-
-})*/
-
 var allData = [];
 document.querySelector("body").addEventListener("click", (event) => {
     var btn_name = event.target.nodeName;
     var btn_class = event.target.className;
     var btn_id = event.target.id;
     var btn_parent = event.target.parentNode.nodeName;
+    var btn_parent_id = event.target.parentNode.id;
+    var btn_parent_class = event.target.parentNode.className;
     var date = new Date();
     var time = date.toLocaleTimeString();
+    var page_link = window.location.href;
+    var page_pathname = window.location.pathname;
 
     if (btn_class == "") {
         btn_class = null;
     } 
-    else if (btn_id == "") {
+    if (btn_id == "") {
         btn_id = null;
+    }
+    if (btn_parent_id == "") {
+        btn_parent_id = null;
+    }
+    if (btn_parent_class == "") {
+        btn_parent_class = null;
     }
 
     allData.push({
@@ -148,7 +115,11 @@ document.querySelector("body").addEventListener("click", (event) => {
         ClassName: btn_class,
         Id: btn_id,
         Parent: btn_parent,
+        ParentId: btn_parent_id,
+        ParentClass: btn_parent_class,
         Date: time,
+        PageLink: page_link,
+        PagePathname: page_pathname
     });
     
     strDane = JSON.stringify(allData);
@@ -162,5 +133,9 @@ document.querySelector("body").addEventListener("click", (event) => {
     console.log("The class of clicked object is:" + btn_class);
     console.log("The id of clicked object is:" + btn_id);
     console.log("The name of clicked object parent is:" + btn_parent);
+    console.log("The class of clicked parent object is:" + btn_parent_class);
+    console.log("The id of clicked parent object is:" + btn_parent_id);
     console.log("The time of clicked object is: " + time);
+    console.log("Page link is: " + page_link);
+    console.log("Page pathname is: " + page_pathname);
 })

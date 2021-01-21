@@ -67,6 +67,7 @@ document.querySelectorAll('a[href^="http://"], a[href^="https://"], a[href^="/"]
             .then((json) => console.log(json));          
     })
 })
+
 function download(filename, text) {
     let temp = document.createElement('a');
     temp.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));

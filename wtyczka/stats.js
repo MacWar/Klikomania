@@ -4,17 +4,14 @@ window.onload = function () {
 
     //if(window.location.pathname==localStorage.leavingPageDataTMP.leavingPageData.pathname) localStorage.leavingPageDataTMP=null;
 
-    if(localStorage.leavingPageDataTMP!=null){
-        download("leavingStats.json",localStorage.leavingPageDataTMP);
-        localStorage.leavingPageDataTMP=null;
+    if(localStorage.leavingPageDataTMP==="http*"){
+      console.log("downloading from localstorage");
+      download("leavingStats.json",localStorage.leavingPageDataTMP);
+      //localStorage.leavingPageDataTMP=null;
     }
 
-    var hrefElements = document.querySelectorAll('a[href^="http://"], a[href^="https://"], a[href^="/"]');
-    
-    console.log(hrefElements);
-
-
-    window.addEventListener('beforeunload', function (e) {
+    window.addEventListener('onbeforeunload', function (e) {
+      //console.log("before")
         leavingPageData = window.location;
         leavingPageDataJSON = {
             leavingPageData : leavingPageData
@@ -92,6 +89,8 @@ hl.addEventListener('click',function(e){
     //     console.log(href);
     // }
 });*/
+
+
 
 function setCookie(cname,cvalue,exdays) {
     var d = new Date();

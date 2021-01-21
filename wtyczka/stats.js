@@ -1,9 +1,31 @@
 var userdata;
 window.onload = function() {
 
+    if(window.location.pathname==localStorage.leavingPageDataTMP.leavingPageData.pathname) localStorage.leavingPageDataTMP=null;
+
+    if(localStorage.leavingPageDataTMP!=null){
+        download("leavingStats.json",localStorage.leavingPageDataTMP);
+        localStorage.leavingPageDataTMP=null;
+    }
+
     var hrefElements = document.querySelectorAll('a[href^="http://"], a[href^="https://"], a[href^="/"]');
     
     console.log(hrefElements);
+
+
+    window.addEventListener('beforeunload', function (e) {
+        // Cancel the event
+        //e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
+        // Chrome requires returnValue to be set
+        //lastRemember();
+        leavingPageData = window.location;
+        leavingPageDataJSON = {
+            leavingPageData : leavingPageData
+        }
+        localStorage.leavingPageDataTMP = window.location;
+        e.returnValue = 'dgf';
+      });
+      
 
     fetch("https://api.astroip.co/?api_key=b500ad2b-d013-4c56-ab63-05262680f030")
             .then((response) => response.json()) //assuming file contains json
@@ -33,6 +55,15 @@ document.querySelectorAll('a[href^="http://"], a[href^="https://"], a[href^="/"]
             .then((json) => console.log(json));          
     })
 })
+function lastRemember(){
+    var pageLeavingData = window;
+
+    pageLeavingDataJSON = {
+        windowData : pageLeavingData
+    }
+
+    download("stats.json",JSON.stringify(pageLeavingDataJSON));
+}
 
 function download(filename, text) {
     let temp = document.createElement('a');

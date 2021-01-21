@@ -6,4 +6,25 @@ document.addEventListener('DOMContentLoaded',function(){
                 chrome.tabs.sendMessage(tabs[0].id,"hi")
             })
     }
-},false)
+}, false)
+
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelector('button#download_data').addEventListener('click', onclick, false)
+    function onclick() {
+        var dataa = null;
+        chrome.storage.local.get(['dane'], result => {
+            dataa = JSON.parse(result.dane);
+            download("plik.json", JSON.stringify(dataa));
+        });
+    }
+}, false)
+
+function download(filename, text) {
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', filename);
+    element.style.display = 'none';
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+}

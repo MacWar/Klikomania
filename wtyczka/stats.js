@@ -53,12 +53,12 @@ document.querySelectorAll('a[href^="http://"], a[href^="https://"], a[href^="/"]
             exitsNumber: localStorage.clickcount
         };
 
-        download(time + " " + pagelink + " exits.json", JSON.stringify(filesDataJSON));
+        download("hrefDatas.json", JSON.stringify(filesDataJSON));
         
         var dataa = null;
         chrome.storage.local.get(['dane'], result => {
             dataa = JSON.parse(result.dane);
-            download(time + " " + pagelink + " stats.json", JSON.stringify(dataa));
+            download("exits.json", JSON.stringify(dataa));
         });
 
         var url = chrome.runtime.getURL('stats.json');

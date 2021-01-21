@@ -1,5 +1,4 @@
 var userdata;
-var licznik;
 
 function clickCounter() {
     if(typeof(Storage) !== "undefined") {
@@ -16,7 +15,6 @@ function clickCounter() {
   
 window.onload = function () {
 
-
     // window.addEventListener('beforeunload', function (e) {
     //   strDane = JSON.parse(window.location.hostname);
     //   chrome.storage.local.set({dane: strDane}, () => {/*console.log(allData)*/});
@@ -27,28 +25,24 @@ window.onload = function () {
     //   });
     // }
 
-  fetch("https://api.astroip.co/?api_key=b500ad2b-d013-4c56-ab63-05262680f030")
+  fetch("https://api.astroip.co/?api_key=b500ad2b-d013-4c56-ab63-05262680f030") // pobieranie za pomocą zewnętrznego API danych o użytkowniku wywołującym akcję
   .then((response) => response.json()) 
   .then((userdataTMP) => userdata = userdataTMP)
   .then((userdata) => console.log(userdata))   
 };
 
 document.querySelectorAll('a[href^="http://"], a[href^="https://"], a[href^="/"]').forEach(item => {
-    item.addEventListener('click', event => {
+    item.addEventListener('click', event => {   // nasłuchiwanie elementów otwierających pliki i pobierających je
         var pagelink = window.location.href;
-
         clickCounter();
 
         var clickedHrefItem = item;
-
-        console.log(clickedHrefItem);
-        
         var clickedHrefItem = item.outerHTML;
 
         var filesDataJSON = {
             userdata : userdata,
             location: window.location,
-            hrefItem: clickedHrefItem,
+            hrefItem: clickedHrefItem,  // zapisywanie akcji z hrefami w postaci jsonowego obiektu
             event: event,
             exitsNumber: localStorage.clickcount
         };
@@ -58,17 +52,17 @@ document.querySelectorAll('a[href^="http://"], a[href^="https://"], a[href^="/"]
         var dataa = null;
         chrome.storage.local.get(['dane'], result => {
             dataa = JSON.parse(result.dane);
-            download("exits.json", JSON.stringify(dataa));
+            download("exits.json", JSON.stringify(dataa));  // pobieranie pliku json z zawartymi danymi o uruchamianych odnośnikach i okolicznościach towarzyszącymi w zdarzeniu
         });
 
         var url = chrome.runtime.getURL('stats.json');
         fetch(url)
             .then((response) => response.json()) 
-            .then((json) => console.log(json));          
+            .then((json) => console.log(json));             // odczyt zbioru danych w json
     })
 })
 
-function download(filename, text) {
+function download(filename, text) { // funkcja odpowiadająca za pobieranie plików json 
     let temp = document.createElement('a');
     temp.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
     temp.setAttribute('download', filename);

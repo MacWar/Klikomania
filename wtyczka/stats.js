@@ -27,7 +27,6 @@ window.onload = function () {
   fetch("https://api.astroip.co/?api_key=b500ad2b-d013-4c56-ab63-05262680f030") // pobieranie za pomocą zewnętrznego API danych o użytkowniku wywołującym akcję
   .then((response) => response.json()) 
   .then((userdataTMP) => userdata = userdataTMP)
-  .then((userdata) => console.log(userdata))   
 };
 
 document.querySelectorAll('a[href^="http://"], a[href^="https://"], a[href^="/"]').forEach(item => {
@@ -54,10 +53,6 @@ document.querySelectorAll('a[href^="http://"], a[href^="https://"], a[href^="/"]
             download("exits.json", JSON.stringify(dataa));  // pobieranie pliku json z zawartymi danymi o uruchamianych odnośnikach i okolicznościach towarzyszącymi w zdarzeniu
         });
 
-        var url = chrome.runtime.getURL('stats.json');
-        fetch(url)
-            .then((response) => response.json()) 
-            .then((json) => console.log(json));             // odczyt zbioru danych w json
     })
 })
 
